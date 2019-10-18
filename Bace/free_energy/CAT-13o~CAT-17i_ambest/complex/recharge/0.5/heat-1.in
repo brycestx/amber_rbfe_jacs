@@ -1,0 +1,48 @@
+&cntrl
+gti_add_sc = 1,
+scbeta = 12.0,
+icfe = 1,
+nstlim = 10000,
+ntwe = 0,
+ntx = 1,
+clambda = 0.5,
+tempi = 5,
+ntr = 1,
+ntt = 3,
+timask2 = ":2",
+timask1 = ":1",
+ifsc = 0,
+cut = 8,
+gamma_ln = 2,
+restraintmask = "!:WAT,Cl-,K+ & !@H=",
+ntc = 2,
+ntwx = 1000,
+iwrap = 1,
+dt = 0.002,
+ntf = 1,
+scmask1 = "",
+tautp = 1,
+scmask2 = "",
+restraint_wt = 5.0,
+ntpr = 100,
+crgmask = ":1@C1,H9,H11,H12,H13,H10,C12,C13,C14,H1,H2,H3",
+ioutfm = 1,
+imin = 0,
+tishake = 1,
+nmropt = 1,
+temp0 = 100,
+scalpha = 0.5,
+ntb = 1,
+irest = 0,
+
+ /
+ &ewald
+ /
+&wt
+type = 'TEMP0',
+istep1 = 0, istep2 = 8000,
+value1 = 5, value2 = 100,
+/
+&wt type = 'END'
+/
+

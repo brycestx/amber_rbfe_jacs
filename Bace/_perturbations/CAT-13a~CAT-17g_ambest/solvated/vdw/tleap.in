@@ -1,0 +1,16 @@
+logFile leap.log
+source leaprc.water.tip3p
+source /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13a~CAT-17g_ambest/L.leaprc
+loadAmberParams /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13a~CAT-17g_ambest/L.frcmod
+Comp0 = loadMol2 /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13a~CAT-17g_ambest/L1_equil.mol2
+source /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13a~CAT-17g_ambest/R.leaprc
+loadAmberParams /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13a~CAT-17g_ambest/R.frcmod
+Comp1 = loadMol2 /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13a~CAT-17g_ambest/R1_equil.mol2
+system = combine {Comp0 Comp1}
+savePdb system solvated-vdw_nowat.pdb
+solvateOct system TIP3PBOX 12.0
+addions system K+ 0
+addions system Cl- 1
+saveAmberParm system solvated-vdw.parm7 solvated-vdw.rst7
+savePdb system solvated-vdw.pdb
+quit

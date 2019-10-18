@@ -1,0 +1,88 @@
+{
+    "master": 
+        {   "workflow_type": "rbfe",    # "rbfe", "abfe", "rhfe", "ahfe", "rhbfe", or "ahbfe" 
+            "morph_input": "Morph.in", 
+            "chunk_size": 50,
+            "protein_name": "Bace",
+            "cofactor_names": [],       # List of strings
+            "cofactor_charges": [],     # List of integers
+            "queue": "project",         # "project" or "open"
+            "stages": ["equil", "morph", "ti"],          # "equil", "morph", "ti" or "all
+            "exclude_nodes": ["fpga385a", "starfish"], # Names of nodes to be excluded
+            "timeout": 36000,           # In seconds
+            "lazy_equil": false,
+            "convergence_check": true,
+            "max_cc_cycle": 3,
+            "cc_mid_err_limit": 0.5,
+            "cc_dG_sem_limit": 0.2
+        },
+
+    "equil": 
+        {   "protein_ff": "ff14SB",     # "ff14SB" or "stxamber"
+            "cofactor_ff": "gaff2",     # Currently only "gaff2"
+            "ligand_ff": "gaff2",       # "ffgen" or "gaff2"
+            "water_ff": "tip3p",        # "tip3p", "bind3p", "opc", or "tip4pd1.5"
+            "box_type": "oct",          # "rect" or "oct"
+            "lig_box_buffer": 12.0,     # Do not make this smaller than 12.0 if mbar is used. 
+            "com_box_buffer": 8.0, 
+            "ligand_length": 0.5,       # in ns
+            "complex_length": 1.0,      # in ns
+            "extra_length": 0.0,        # in ns
+            "restraint_wt": 5.0,        # in kcal/mol/angstrom^2
+            "restraint_mask": "!:WAT,Cl-,K+ & !@H=",    
+            "fix_restraint_mask": "",
+            "relax_steps": 4,
+            "traj_interval": 10000,
+            "neutralize": true
+        },
+    "morph":
+        {
+            "atom_mapping_dir": "atom_mapping",
+            "atom_mapping_mode": "am_best", # "mcs", "am_best" or "am_all"
+            "hmr": true,
+            "protocol": "decoupled",
+            "sams": false,
+            "ref_chg_fit": false
+        },
+    "ti":
+        {
+            "length": 0.1,              # in ns
+            "restraint_wt": 5.0,        # in kcal/mol/angstrom^2
+            "restraint_mask": "!:WAT,Cl-,K+ & !@H=",
+            "fix_restraint_mask": "",
+            "mbar": true
+        },
+    "analysis":
+        {
+            "atomic_decomposition": true,
+            "decomp_run_amber": true,
+            "decomp_fe_min": 0.1,
+            "decomp_fe_max": 1.0,
+            "decomp_fe_min_ball": 0.3,
+            "decomp_fe_max_ball": 0.7,
+            "decomp_residue_fe_min": 0.1,
+
+            "footprint": false,
+            "footprint_dist_cutoff": 3.0,
+            "footprint_ene_cutoff": 0.25,
+            "footprint_outframe_stride": 20,
+            "footprint_ene_step0": 'decharge',
+            "footprint_ene_step1": 'recharge',
+            "footprint_traj_step": 'vdw',
+
+            "rbfe_plus": false,
+            "rbfe_plus_threshold": -1.0,
+            "rbfe_plus_modes": ['randomseed', 'gaff2'],
+            "rbfe_plus_num_randomseed": 3
+        },
+    "postanalysis":
+        {
+            "keys": ["TI", "MBAR"],
+            "sort_key": ["TI"],
+            "max_pse_groups": 10,
+            "write_cc_cycle": true,
+            "del_inter_lambdas": true,
+            "selection_mode": 'top_bottom'
+        }
+
+}

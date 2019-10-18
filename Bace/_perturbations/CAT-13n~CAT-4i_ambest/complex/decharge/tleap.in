@@ -1,0 +1,13 @@
+logFile leap.log
+source leaprc.water.tip3p
+source /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13n~CAT-4i_ambest/L.leaprc
+loadAmberParams /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13n~CAT-4i_ambest/L.frcmod
+Comp0 = loadMol2 /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13n~CAT-4i_ambest/L1_equil.mol2
+Comp1 = loadMol2 /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13n~CAT-4i_ambest/L1_equil.mol2
+source leaprc.ff14SB
+Comp2 = loadPdb /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_perturbations/CAT-13n~CAT-4i_ambest/no_lig.pdb
+system = combine {Comp0 Comp1 Comp2}
+savePdb system complex-decharge_nowat.pdb
+saveAmberParm system complex-decharge.parm7 complex-decharge.rst7
+savePdb system complex-decharge.pdb
+quit

@@ -1,0 +1,16 @@
+&cntrl
+ncyc = 50,
+imin = 1,
+maxcyc = 5000,
+ntwe = 0,
+ntmin = 1,
+ntpr = 1000,
+ntr = 1,
+dx0 = 0.005,
+restraint_wt = 5.0,
+drms = 0.1,
+ntb = 1,
+iwrap = 1,
+restraintmask = "!:WAT,Cl-,K+ & !@H=",
+/
+

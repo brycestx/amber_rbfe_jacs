@@ -1,0 +1,16 @@
+logFile leap.log
+source leaprc.water.tip3p
+source leaprc.ff14SB
+Comp0 = loadPdb /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/proteins/Bace/protein.pdb
+source /software/amber16_latest_patched/dat/leap/cmd/leaprc.gaff2
+loadAmberParams /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_ligands/CAT-13e/vacuum.frcmod
+Comp1 = loadMol2 /projects3/ballen/jacs/19.09.16_atom_mapping_jacs_dataset/Bace/_ligands/CAT-13e/vacuum_1.mol2
+system = combine {Comp0 Comp1}
+savePdb system complex_nowat.pdb
+solvateOct system TIP3PBOX 8.0
+addions system K+ 0
+addions system Cl- 0
+saveAmberParm system complex.parm7 complex.rst7
+savePdb system complex.pdb
+quit
+
